@@ -11,7 +11,7 @@ public class HelloWorld {
     @GET //@Path("{myparam}")
     @Produces("text/plain")
     public String getHelloWorld() {
-    	return "helloWorld";
+    	return "hello World";
     }
 }
 
