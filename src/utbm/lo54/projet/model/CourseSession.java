@@ -1,6 +1,7 @@
 package utbm.lo54.projet.model;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class CourseSession {
 	private int id;
