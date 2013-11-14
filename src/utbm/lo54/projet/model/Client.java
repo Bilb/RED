@@ -2,23 +2,12 @@ package utbm.lo54.projet.model;
 
 public class Client {
 	private int id;
-	
 	private String lastname;
-	
 	private String firstName;
-	
 	private String address;
-	
 	private String phone;
-	
 	private int sessionId;
 	
-	
-	
-	
-	
-	
-
 	public Client(int id, String lastname, String firstName, String address,
 			String phone, int sessionId) {
 		super();
@@ -30,8 +19,6 @@ public class Client {
 		this.sessionId = sessionId;
 	}
 	
-	
-
 	public int getId() {
 		return id;
 	}
@@ -78,6 +65,5 @@ public class Client {
 
 	public void setSessionId(int sessionId) {
 		this.sessionId = sessionId;
-	}
-	
+	}	
 }

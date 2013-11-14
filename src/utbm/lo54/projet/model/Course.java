@@ -1,13 +1,9 @@
 package utbm.lo54.projet.model;
 
 public class Course {
-
 	private String code;
-	
 	private String title;
 	
-	
-
 	public Course(String code, String title) {
 		super();
 		this.code = code;
@@ -29,7 +25,4 @@ public class Course {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
-	
 }
