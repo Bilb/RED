@@ -3,20 +3,12 @@ package utbm.lo54.projet.model;
 import java.sql.Date;
 
 public class CourseSession {
-
 	private int id;
-	
 	private Date start;
-	
 	private Date end;
-	
 	private String courseCode;
-	
 	private int locationId;
 	
-	
-	
-
 	public CourseSession(int id, Date start, Date end, String courseCode,
 			int locationId) {
 		super();
@@ -26,7 +18,6 @@ public class CourseSession {
 		this.courseCode = courseCode;
 		this.locationId = locationId;
 	}
-	
 
 	public int getId() {
 		return id;
@@ -67,7 +58,4 @@ public class CourseSession {
 	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
-	
-	
-	
 }
