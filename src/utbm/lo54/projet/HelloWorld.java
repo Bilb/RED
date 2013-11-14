@@ -8,14 +8,10 @@ import javax.ws.rs.Produces;
 @Path("/hello")
 public class HelloWorld {
 
-    @GET //@Path("{myparam}")
+    @GET 
     @Produces("text/plain")
     public String getHelloWorld() {
     	return "hello World";
     }
 }
 
-
-//public String getHtml(@PathParam("myparam") String myparam) {
-//return "<html><body>"+myparam+"</body></html>";
-//}

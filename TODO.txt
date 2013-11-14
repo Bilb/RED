@@ -1,6 +1,11 @@
 
 
 [ ]	Déterminer URL pour les 4 accès. (utilisateur doit pouvoir s'inscire aussi)
+	- byKeyWord
+	- byDate
+	- byLocation
+	- subscribe
+	
 [ ] Remplir BDD avec données de tests
 [ ] Création des méthodes de traitements
 [ ] 
