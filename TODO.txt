@@ -1,0 +1,13 @@
+
+
+[ ]	Déterminer URL pour les 4 accès. (utilisateur doit pouvoir s'inscire aussi)
+[ ] Remplir BDD avec données de tests
+[ ] Création des méthodes de traitements
+[ ] 
+[ ] 
+[ ] 
+[ ] 
+[ ] Partie client
+	[ ]	JSON pour réponses
+	[ ]	Pas de rechargement de pages : JQuery
+	
