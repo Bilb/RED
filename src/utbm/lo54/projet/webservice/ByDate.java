@@ -22,6 +22,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+/**
+ * 
+ * @author Audric Ackermann
+ *
+ */
 @Path("/byDate")
 public class ByDate {
 
@@ -83,7 +88,6 @@ public class ByDate {
 		try {
 			return mapper.writeValueAsString(records);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
