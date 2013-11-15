@@ -47,10 +47,10 @@ public class ByDate {
 
 			Connection con = null;
 			try {
-				Class.forName("org.gjt.mm.mysql.Driver").newInstance();
+				Class.forName(Commons.JDBC_DRIVER).newInstance();
 				String dataServerURL=new
-						String("jdbc:mysql://localhost:3306/schoolFormation");
-				con=DriverManager.getConnection(dataServerURL,"blue","blue");
+						String(Commons.SQL_SERVER_URL);
+				con=DriverManager.getConnection(dataServerURL,Commons.DATABASE_USER, Commons.DATABASE_PASSWORD);
 
 				PreparedStatement stmt = con.prepareStatement("SELECT ID, START, END, "
 						+ "COURSE_CODE, TITLE FROM COURSE_SESSION AS ses "
@@ -90,7 +90,7 @@ public class ByDate {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return "[ ]";
 
 	}
 
