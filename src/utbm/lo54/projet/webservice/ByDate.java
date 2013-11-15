@@ -18,6 +18,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Path("/byDate")
 public class ByDate {
@@ -26,8 +29,11 @@ public class ByDate {
 	@GET 
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ByDateRecord> getByDate(@QueryParam("date") String requestDate) {
-
+	public String getByDate(@QueryParam("date") String requestDate) {
+		
+		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
+		ObjectMapper mapper = provider.getContext(null);
+		
 
 		List<ByDateRecord> records = new ArrayList<ByDateRecord>();
 		try {
@@ -74,7 +80,13 @@ public class ByDate {
 			e.printStackTrace();
 		}
 
-		return records;
+		try {
+			return mapper.writeValueAsString(records);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 
