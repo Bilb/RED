@@ -8,14 +8,15 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
 
 
 @Path("/byDate")
@@ -25,9 +26,10 @@ public class ByDate {
 	@GET 
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ByDateRecord getByDate(@QueryParam("date") String requestDate) {
+	public List<ByDateRecord> getByDate(@QueryParam("date") String requestDate) {
 
-		//List<ByDateRecord> records = new ArrayList<ByDateRecord>();
+
+		List<ByDateRecord> records = new ArrayList<ByDateRecord>();
 		try {
 			DateFormat decodeFromQuery = new SimpleDateFormat("dd-MM-yyyy");
 			Date date = (Date) decodeFromQuery.parse(requestDate);
@@ -48,13 +50,12 @@ public class ByDate {
 				stmt.setString(1, "" + encodeForSql.format(date));
 
 				ResultSet rs = stmt.executeQuery();
-
 				while(rs.next()) {
-					ByDateRecord record = new ByDateRecord(rs.getInt(1), rs.getString(2), rs.getString(3), 
-							rs.getString(4), rs.getString(5));
-					//records.add(record);
-					return record;
+					ByDateRecord record = new ByDateRecord(rs.getInt(1), rs.getString(2), 
+							rs.getString(3), rs.getString(4), rs.getString(5));
+					records.add(record);
 				}
+
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -73,7 +74,12 @@ public class ByDate {
 			e.printStackTrace();
 		}
 
-		return null;
+		return records;
 
 	}
+
+
+
+
+
 }
