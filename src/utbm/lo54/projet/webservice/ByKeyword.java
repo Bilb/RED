@@ -2,12 +2,17 @@ package utbm.lo54.projet.webservice;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,32 +24,37 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import utbm.lo54.projet.model.Course;
 
-@Path("/ByKeyword/{keyword}")
+@Path("/byKeyword/{keyword}")
 public class ByKeyword {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getFormationList(@PathParam("keyword") String keyword) {
-		/* loading the JDBC driver for MySQL */
-		try {
-			Class.forName( "com.mysql.jdbc.Driver" );
-		} catch ( ClassNotFoundException e ) {
-			return "failed loading driver";
-		}
 
 		Connection connexion = null;
 		List<Course> courseListMatchingKeyword = new ArrayList<Course>();
-		
+
 		try {
-			connexion = DriverManager.getConnection( "jdbc:mysql://localhost:3306/schoolFormation", "blue", "blue" );
-			Statement statement = connexion.createStatement();
-			ResultSet resultat = statement.executeQuery( "SELECT code, title  FROM Course WHERE title like '%"+ keyword +"%';" );
+
+			DataSource dataSource = null;
+			Context namingContext;
+			namingContext = new InitialContext();
+			dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
+			connexion = dataSource.getConnection();
+			PreparedStatement statement = connexion.prepareStatement("SELECT code, title  FROM Course WHERE title like ?");
+			keyword = "%"+keyword+"%";
+			statement.setString(1, keyword);
+			ResultSet resultat = statement.executeQuery();
 			while ( resultat.next() ) {
 				Course record = new Course(resultat.getString("code"), resultat.getString("title"));
 				courseListMatchingKeyword.add(record);
 			}
 
+		} catch (NamingException e) {
+			e.printStackTrace();
+
 		} catch ( SQLException e ) {
+			e.printStackTrace();
 			return "failed to connect";
 		}
 		finally {
@@ -56,7 +66,7 @@ public class ByKeyword {
 				}
 			}
 		}
-		
+
 		// Converting to json format
 		ObjectMapper mapper = new ObjectMapper();
 		try {
