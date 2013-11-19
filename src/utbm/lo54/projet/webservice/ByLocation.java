@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import utbm.lo54.projet.core.Commons;
 import utbm.lo54.projet.model.CourseSession;
 
 @Path("/byLocation/{KeyLocation}")

@@ -21,6 +21,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import utbm.lo54.projet.core.IndentObjectMapperProvider;
+import utbm.lo54.projet.model.ByDateRecord;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,7 +35,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Path("/byDate")
 public class ByDate {
-
 
 	@GET 
 	@Path("/")

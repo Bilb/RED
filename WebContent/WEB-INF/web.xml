@@ -6,6 +6,9 @@
 	version="3.0">
 
 	<display-name>RED</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 	<servlet>
 		<description>JAX-RS Tools Generated - Do not modify</description>
 		<servlet-name>JAX-RS Servlet</servlet-name>
@@ -22,6 +25,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JAX-RS Servlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/service/*</url-pattern>
 	</servlet-mapping>
 </web-app>
