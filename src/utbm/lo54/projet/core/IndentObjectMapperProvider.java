@@ -26,7 +26,7 @@ public class IndentObjectMapperProvider implements ContextResolver<ObjectMapper>
 	private static ObjectMapper createDefaultMapper() {
 		ObjectMapper result = new ObjectMapper();
 		result.enable(SerializationFeature.INDENT_OUTPUT);
-		result.setDateFormat(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss"));
+		result.setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
 		
 		return result;
 	}
