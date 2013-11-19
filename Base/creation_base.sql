@@ -1,3 +1,5 @@
+DROP DATABASE schoolFormation;
+
 CREATE DATABASE schoolFormation;
 USE schoolFormation;
 
