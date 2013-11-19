@@ -26,9 +26,9 @@ public class ByLocation {
 		StringBuilder string = new StringBuilder();
 
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver").newInstance();
-			String dataServerURL = new String("jdbc:mysql://localhost:3306/schoolFormation");
-			connexion = DriverManager.getConnection(dataServerURL,"blue","blue");
+			Class.forName(Commons.JDBC_DRIVER).newInstance();
+			String dataServerURL = new String(Commons.SQL_SERVER_URL);
+			connexion = DriverManager.getConnection(dataServerURL,Commons.DATABASE_USER,Commons.DATABASE_PASSWORD);
 			Statement statement = connexion.createStatement();
 			ResultSet resultSet = statement.executeQuery("select "
 															+ "cs.id, cs.start, cs.end, cs.course_code, cs.location_id "
