@@ -9,6 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,18 +30,21 @@ public class ByKeyword {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getFormationList(@PathParam("keyword") String keyword) {
-		/* loading the JDBC driver for MySQL */
-		try {
-			Class.forName( "com.mysql.jdbc.Driver" );
-		} catch ( ClassNotFoundException e ) {
-			return "failed loading driver";
-		}
 
+		DataSource dataSource = null;
 		Connection connexion = null;
 		List<Course> courseListMatchingKeyword = new ArrayList<Course>();
 		
 		try {
-			connexion = DriverManager.getConnection( "jdbc:mysql://localhost:3306/schoolFormation", "blue", "blue" );
+			try {
+				Context namingContext;
+				namingContext = new InitialContext();
+				dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connexion = dataSource.getConnection();
 			PreparedStatement statement = connexion.prepareStatement("SELECT code, title  FROM Course WHERE title like '%?%'");
 			statement.setString(1, keyword);
 			ResultSet resultat = statement.executeQuery( "" );

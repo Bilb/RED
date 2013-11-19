@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -23,16 +27,18 @@ public class Subscribe {
 			@PathParam("email") 		String		email				
 			) {
 
-		/* loading the JDBC driver for MySQL */
-		try {
-			Class.forName( "com.mysql.jdbc.Driver" );
-		} catch ( ClassNotFoundException e ) {
-			return "failed loading driver";
-		}
-
 		Connection connexion = null;
+		DataSource dataSource = null;
 		try {
-			connexion = DriverManager.getConnection( "jdbc:mysql://localhost:3306/schoolFormation", "blue", "blue" );
+			try {
+				Context namingContext;
+				namingContext = new InitialContext();
+				dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			connexion = dataSource.getConnection();
 			PreparedStatement statement = connexion.prepareStatement("INSERT INTO CLIENT"
 					+ " ( LASTNAME, FIRSTNAME, ADDRESS, PHONE, EMAIL, SESSION_ID)"
 					+ " VALUES (?, ?, ?, ?, ?, ?)"
