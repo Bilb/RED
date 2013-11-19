@@ -1,7 +1,6 @@
 package utbm.lo54.projet.webservice;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,27 +12,32 @@ import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import utbm.lo54.projet.model.Location;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/byLocation")
 public class Locations {
 
 	@GET 
-	@Produces("text/plain")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getLocations() {
-
+		
+		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
+		ObjectMapper mapper = provider.getContext(null);
 		Connection connexion = null;
-
+		ArrayList<Location> locations = new ArrayList<Location>();
+		
 		try {
 			Context myContext = new InitialContext();
 			DataSource datasource = (DataSource) myContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
 			connexion = datasource.getConnection();
-//			String dataServerURL = new String("jdbc:mysql://localhost:3306/schoolFormation");
-//			connexion = DriverManager.getConnection(dataServerURL,"blue","blue");
 			Statement statement = connexion.createStatement();
 			ResultSet resultSet = statement.executeQuery("select id, city from location");
-			ArrayList<Location> locations = new ArrayList<Location>();
+			
 			
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
@@ -58,6 +62,12 @@ public class Locations {
 					e.printStackTrace();
 				}
 			}
+		}
+		
+		try {
+			return mapper.writeValueAsString(locations);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
 		}
 
 		return "ByLocation";
