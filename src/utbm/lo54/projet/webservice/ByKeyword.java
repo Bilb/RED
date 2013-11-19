@@ -31,29 +31,30 @@ public class ByKeyword {
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getFormationList(@PathParam("keyword") String keyword) {
 
-		DataSource dataSource = null;
 		Connection connexion = null;
 		List<Course> courseListMatchingKeyword = new ArrayList<Course>();
-		
+
 		try {
-			try {
-				Context namingContext;
-				namingContext = new InitialContext();
-				dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			DataSource dataSource = null;
+			Context namingContext;
+			namingContext = new InitialContext();
+			dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
 			connexion = dataSource.getConnection();
-			PreparedStatement statement = connexion.prepareStatement("SELECT code, title  FROM Course WHERE title like '%?%'");
+			PreparedStatement statement = connexion.prepareStatement("SELECT code, title  FROM Course WHERE title like ?");
+			keyword = "%"+keyword+"%";
 			statement.setString(1, keyword);
-			ResultSet resultat = statement.executeQuery( "" );
+			ResultSet resultat = statement.executeQuery();
 			while ( resultat.next() ) {
 				Course record = new Course(resultat.getString("code"), resultat.getString("title"));
 				courseListMatchingKeyword.add(record);
 			}
 
+		} catch (NamingException e) {
+			e.printStackTrace();
+
 		} catch ( SQLException e ) {
+			e.printStackTrace();
 			return "failed to connect";
 		}
 		finally {
@@ -65,7 +66,7 @@ public class ByKeyword {
 				}
 			}
 		}
-		
+
 		// Converting to json format
 		ObjectMapper mapper = new ObjectMapper();
 		try {
