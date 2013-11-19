@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -23,9 +26,11 @@ public class Locations {
 		Connection connexion = null;
 
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver").newInstance();
-			String dataServerURL = new String("jdbc:mysql://localhost:3306/schoolFormation");
-			connexion = DriverManager.getConnection(dataServerURL,"blue","blue");
+			Context myContext = new InitialContext();
+			DataSource datasource = (DataSource) myContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
+			connexion = datasource.getConnection();
+//			String dataServerURL = new String("jdbc:mysql://localhost:3306/schoolFormation");
+//			connexion = DriverManager.getConnection(dataServerURL,"blue","blue");
 			Statement statement = connexion.createStatement();
 			ResultSet resultSet = statement.executeQuery("select id, city from location");
 			ArrayList<Location> locations = new ArrayList<Location>();

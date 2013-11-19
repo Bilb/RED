@@ -2,12 +2,16 @@ package utbm.lo54.projet.webservice;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,18 +30,21 @@ public class ByLocation {
 		StringBuilder string = new StringBuilder();
 
 		try {
-			Class.forName(Commons.JDBC_DRIVER).newInstance();
-			String dataServerURL = new String(Commons.SQL_SERVER_URL);
-			connexion = DriverManager.getConnection(dataServerURL,Commons.DATABASE_USER,Commons.DATABASE_PASSWORD);
-			Statement statement = connexion.createStatement();
-			ResultSet resultSet = statement.executeQuery("select "
+			Context myContext = new InitialContext();
+			DataSource datasource = (DataSource) myContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
+			connexion = datasource.getConnection();
+			
+			
+			PreparedStatement statement = connexion.prepareStatement("select "
 															+ "cs.id, cs.start, cs.end, cs.course_code, cs.location_id "
 														+ "from "
 															+ "course_session as cs "
 																+ "inner join location as l "
 																	+ "on (cs.location_id = l.id) "
 														+ "where "
-															+ "l.city = '"+KeyLocation+"'");
+															+ "l.city =  ? ");
+			statement.setString(1,KeyLocation);
+			ResultSet resultSet = statement.executeQuery();
 			
 			ArrayList<CourseSession> courseSessions = new ArrayList<CourseSession>();
 			
