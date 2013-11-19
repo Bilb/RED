@@ -33,13 +33,13 @@ public class ByDateRecord {
 			String title) {
 		super();
 		this.id = id;
-		DateFormat encodeForSql = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat encodeForSql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		try {
 			this.start = encodeForSql.parse(start);
 			this.end = encodeForSql.parse(end);
 		} catch (ParseException e) {
-			System.err.println("Incorrect DateFormat for start or end: must be : 'yyyy-MM-dd'");
+			System.err.println("Incorrect DateFormat for start or end: must be : 'yyyy-MM-dd '");
 			e.printStackTrace();
 		}
 		this.courseCode = courseCode;

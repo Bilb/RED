@@ -35,7 +35,6 @@ public class ByDate {
 
 
 	@GET 
-	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getByDate(@QueryParam("date") String requestDate) {
 
@@ -57,10 +56,11 @@ public class ByDate {
 			PreparedStatement stmt = con.prepareStatement("SELECT ID, START, END, "
 					+ "COURSE_CODE, TITLE FROM COURSE_SESSION AS ses "
 					+ "INNER JOIN COURSE AS crs ON ses.COURSE_CODE=crs.CODE "
-					+ "WHERE START=?");
+					+ "WHERE START LIKE ?");
 
 			DateFormat encodeForSql = new SimpleDateFormat("yyyy-MM-dd");
-			stmt.setString(1, "" + encodeForSql.format(date));
+			stmt.setString(1, "" + encodeForSql.format(date)+"%");
+			
 
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
