@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+	 <title>School Formation - HOME</title>
+<script src="jquery.min.js"></script>
+<script src="tablesorter/tsort.min.js"></script>
+<script type="text/javascript" src="jsonTable.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        
+<link rel="stylesheet" type="text/css" href="jquery.toast/jquery.toast.min.css" />
+<script type="text/javascript" src="jquery.toast/jquery.toast.min.js"></script>
+<script type="text/javascript">
+	function createToast(t){
+		var options = {
+			duration: 5000,
+			sticky: false,
+			type: t
+		};
+		
+		$.toast('<h4>Success</h4> You are register to this session. ', options);
+	}
+	
+	$(document).ready(function(){
+		$.toast.config.align = 'right';
+		$.toast.config.width = 400;
+		
+		$('a').click(function(){
+			createToast($(this).attr('class'));
+			return false;
+		});
+	});
+</script>
+
+<link href="tablesorter/style.css" rel="stylesheet">
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('table.tableSorter').tableSort();
+		});
+	</script>
+	
+	<script>
+	  $(function() {
+		$( "#datepicker" ).datepicker({
+			showButtonPanel: true
+			});
+			$( "#anim" ).change(function() {
+				$( "#datepicker" ).datepicker( "option", "showAnim", "fold" );
+				$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yyyy" );
+			});
+	  });
+	</script>
+	
+	
+</head>
+
+  <body >
+	  <!-- background="image/bg_texture.jpg" -->
+
+    <div class="container">
+		
+	<p>Date: <input type="text" id="datepicker" /></p>
+		
+	<button id="launchScript" onclick="dosomething()" >Update!</button>
+	<table id="dataTable" class="table table-hover table-striped tableSorter" >
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+	</table>
+	
+
+	
+    <script src="dist/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		function dosomething()
+		{
+			 $("#dataTable").jsonTable({
+                head : ['#','Operating System','Market Share'],
+                json : ['id', 'name', 'share']
+			});
+			
+			/*var options = {
+			source : "data.json", // Can be a URL or a JSON object array
+			rowClass : "rowClass", //(optional) Class to be applied
+			callback : function() {
+				// (optional) Do something when table is updated
+				}
+			}*/
+			
+			
+			var obj = [
+				{"id" : 1, "name" : "iOS", "share" : 57.56},
+				{"id" : 2, "name" : "Android", "share" : 24.66},
+				{"id" : 3, "name" : "Java ME", "share" : 10.72},
+				{"id" : 4, "name" : "Symbian", "share" : 2.49},
+				{"id" : 5, "name" : "Blackberry", "share" : 2.26},
+				{"id" : 6, "name" : "Windows Phone", "share" : 1.33}
+				]
+			
+			var options = {
+				source : obj,
+				rowClass : "rowClass",
+			}
+			
+			$("#dataTable").jsonTableUpdate(options);
+			$('table.tableSorter').tableSort();
+		}
+	</script>
+	
+	<a href="#" class="success">Register me to this session</a>
+	
+	
+ 
+
+  </body>
+</html>
