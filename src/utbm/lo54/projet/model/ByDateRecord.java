@@ -1,4 +1,4 @@
-package utbm.lo54.projet.webservice;
+package utbm.lo54.projet.model;
 
 import java.text.DateFormat;
 import java.text.ParseException;

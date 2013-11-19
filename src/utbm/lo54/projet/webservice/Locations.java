@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import utbm.lo54.projet.core.IndentObjectMapperProvider;
 import utbm.lo54.projet.model.Location;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

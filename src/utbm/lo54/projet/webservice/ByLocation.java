@@ -17,10 +17,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import utbm.lo54.projet.core.IndentObjectMapperProvider;
 import utbm.lo54.projet.model.ByLocationRecord;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Path("/byLocation/{KeyLocation}")
 public class ByLocation {

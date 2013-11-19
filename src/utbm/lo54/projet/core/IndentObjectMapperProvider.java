@@ -1,4 +1,4 @@
-package utbm.lo54.projet.webservice;
+package utbm.lo54.projet.core;
 
 import java.text.SimpleDateFormat;
 
