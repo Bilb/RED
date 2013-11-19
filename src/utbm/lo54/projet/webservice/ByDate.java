@@ -33,7 +33,7 @@ public class ByDate {
 
 	@GET 
 	@Path("/")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getByDate(@QueryParam("date") String requestDate) {
 		
 		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();

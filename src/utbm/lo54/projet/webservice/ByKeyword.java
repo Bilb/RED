@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +23,7 @@ import utbm.lo54.projet.model.Course;
 public class ByKeyword {
 
 	@GET
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getFormationList(@PathParam("keyword") String keyword) {
 		/* loading the JDBC driver for MySQL */
 		try {
