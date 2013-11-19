@@ -3,6 +3,9 @@
 <html lang="en">
 <head>
 <title>School Formation - HOME</title>
+
+
+
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="js/tablesorter/tsort.min.js"></script>
@@ -19,9 +22,13 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
+<link rel="stylesheet"
+	href="datepicker/css/datepicker.css" />
 
 
 <script type="text/javascript" src="js/toast/jquery.toast.min.js"></script>
+<script type="text/javascript" src="datepicker/js/bootstrap-datepicker.js"></script>
+
 <script type="text/javascript">
 	function createToast(t){
 		var options = {
@@ -49,6 +56,7 @@
 		$(document).ready(function() {
 			$('table.tableSorter').tableSort();
 		});
+		
 	</script>
 
 <script>
@@ -63,7 +71,8 @@
 	  });
 	</script>
 
-
+<link href="dist/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="dist/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
@@ -74,8 +83,7 @@
 		<p>
 			Date: <input type="text" id="datepicker" />
 		</p>
-
-		<button id="launchScript" onclick="dosomething()">Update!</button>
+		<button type="button"  class="btn btn-lg btn-default"id="launchScript" onclick="dosomething()">Update!</button>
 		<table id="dataTable"
 			class="table table-hover table-striped tableSorter">
 			<thead>
@@ -84,6 +92,7 @@
 			</tbody>
 		</table>
 
+	<script type="text/javascript">$('.datepicker').datepicker()</script>
 
 
 		<script src="dist/js/bootstrap.min.js"></script>
@@ -122,8 +131,10 @@
 			$("#dataTable").jsonTableUpdate(options);
 			$('table.tableSorter').tableSort();
 		}
+		
 	</script>
-
+	<input type="text" class="datepicker" placeholder="Click me!">
+	<script type="text/javascript">$('.datepicker').datepicker();</script>
 		<a href="#" class="success">Register me to this session</a>
 </body>
 </html>
