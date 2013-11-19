@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import utbm.lo54.projet.model.Course;
 
-@Path("/ByKeyword/{keyword}")
+@Path("/byKeyword/{keyword}")
 public class ByKeyword {
 
 	@GET

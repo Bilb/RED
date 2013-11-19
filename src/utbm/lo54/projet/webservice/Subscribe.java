@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-@Path("/Subscribe/{session}/{lastName}/{firstName}/{address}/{phone}/{email}")
+@Path("/subscribe/{session}/{lastName}/{firstName}/{address}/{phone}/{email}")
 public class Subscribe {
 	@GET
 	@Produces("text/plain")
