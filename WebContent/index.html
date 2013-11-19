@@ -1,129 +1,143 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>School Formation - HOME</title>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="js/tablesorter/tsort.min.js"></script>
-<script type="text/javascript" src="js/jsonTable.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
-<link rel="stylesheet" type="text/css"
-	href="https://raw.github.com/Soldier-B/jquery.toast/master/jquery.toast/jquery.toast.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="js/toast/jquery.toast.min.css" />
-<link rel="stylesheet" href="js/tablesorter/style.css">
-<link rel="stylesheet" href="dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-
-
-
-<script type="text/javascript" src="js/toast/jquery.toast.min.js"></script>
-<script type="text/javascript">
-	function createToast(t){
-		var options = {
-			duration: 5000,
-			sticky: false,
-			type: t
-		};
+	<head>
+		<title>School Formation - HOME</title>
 		
-		$.toast('<h4>Success</h4> You are register to this session. ', options);
-	}
-	
-	$(document).ready(function(){
-		$.toast.config.align = 'right';
-		$.toast.config.width = 400;
+		<link rel="stylesheet" 
+			  type="text/css"
+			  href="https://raw.github.com/Soldier-B/jquery.toast/master/jquery.toast/jquery.toast.min.css" />
+		<link rel="stylesheet" 
+			  type="text/css"
+			  href="js/toast/jquery.toast.min.css" />
+		<link rel="stylesheet" 
+			  href="js/tablesorter/style.css">
+		<link rel="stylesheet"
+			  href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<link rel="stylesheet" 
+			  href="dist/css/bootstrap.css">
+		<link rel="stylesheet" 
+			  href="dist/css/bootstrap.min.css">
+		<link rel="stylesheet" 
+			  href="dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" 
+			  href="dist/css/bootstrap-theme.css">
+			  
+		<script type="text/javascript"
+				src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+		</script>
+		<script type="text/javascript" 
+				src="js/tablesorter/tsort.min.js">
+		</script>
+		<script type="text/javascript" 
+				src="js/jsonTable.js">
+		</script>
+		<script type="text/javascript"
+				src="http://code.jquery.com/ui/1.10.3/jquery-ui.js">
+		</script>
+		<script type="text/javascript" 
+				src="js/toast/jquery.toast.min.js">
+		</script>
 		
-		$('a').click(function(){
-			createToast($(this).attr('class'));
-			return false;
-		});
-	});
-</script>
-
-
-<script type="text/javascript">
-		$(document).ready(function() {
-			$('table.tableSorter').tableSort();
-		});
-	</script>
-
-<script>
-	  $(function() {
-		$( "#datepicker" ).datepicker({
-			showButtonPanel: true
-			});
-			$( "#anim" ).change(function() {
-				$( "#datepicker" ).datepicker( "option", "showAnim", "fold" );
-				$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yyyy" );
-			});
-	  });
-	</script>
-
-
-</head>
-
-<body>
-	<!-- background="image/bg_texture.jpg" -->
-
-	<div class="container">
-
-		<p>
-			Date: <input type="text" id="datepicker" />
-		</p>
-
-		<button id="launchScript" onclick="dosomething()">Update!</button>
-		<table id="dataTable"
-			class="table table-hover table-striped tableSorter">
-			<thead>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-
-
-
-		<script src="dist/js/bootstrap.min.js"></script>
-
 		<script type="text/javascript">
-		function dosomething()
-		{
-			 $("#dataTable").jsonTable({
-                head : ['#','Operating System','Market Share'],
-                json : ['id', 'name', 'share']
-			});
-			
-			/*var options = {
-			source : "data.json", // Can be a URL or a JSON object array
-			rowClass : "rowClass", //(optional) Class to be applied
-			callback : function() {
-				// (optional) Do something when table is updated
-				}
-			}*/
-			
-			
-			var obj = [
-				{"id" : 1, "name" : "iOS", "share" : 57.56},
-				{"id" : 2, "name" : "Android", "share" : 24.66},
-				{"id" : 3, "name" : "Java ME", "share" : 10.72},
-				{"id" : 4, "name" : "Symbian", "share" : 2.49},
-				{"id" : 5, "name" : "Blackberry", "share" : 2.26},
-				{"id" : 6, "name" : "Windows Phone", "share" : 1.33}
-				]
-			
-			var options = {
-				source : obj,
-				rowClass : "rowClass",
+			function createToast(t){
+				var options = {
+					duration: 5000,
+					sticky: false,
+					type: t
+				};
+				
+				$.toast('<h4>Success</h4> You are register to this session. ', options);
 			}
 			
-			$("#dataTable").jsonTableUpdate(options);
-			$('table.tableSorter').tableSort();
-		}
-	</script>
-
-		<a href="#" class="success">Register me to this session</a>
-</body>
+			$(document).ready(function(){
+				$.toast.config.align = 'right';
+				$.toast.config.width = 400;
+				
+				$('a').click(function(){
+					createToast($(this).attr('class'));
+					return false;
+				});
+			});
+		</script>
+		
+		<script type="text/javascript">
+				$(document).ready(function() {
+					$('table.tableSorter').tableSort();
+				});
+		</script>
+		
+		<script>
+			  $(function() {
+				$( "#datepicker" ).datepicker({
+					showButtonPanel: true
+					});
+					$( "#anim" ).change(function() {
+						$( "#datepicker" ).datepicker( "option", "showAnim", "fold" );
+						$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yyyy" );
+					});
+			  });
+		</script>
+		
+		<script type="text/javascript">
+			function dosomething()
+			{
+				 $("#dataTable").jsonTable({
+	                head : ['#','Operating System','Market Share'],
+	                json : ['id', 'name', 'share']
+				});
+				
+				/*var options = {
+				source : "data.json", // Can be a URL or a JSON object array
+				rowClass : "rowClass", //(optional) Class to be applied
+				callback : function() {
+					// (optional) Do something when table is updated
+					}
+				}*/
+				
+				
+				var obj = [
+					{"id" : 1, "name" : "iOS", "share" : 57.56},
+					{"id" : 2, "name" : "Android", "share" : 24.66},
+					{"id" : 3, "name" : "Java ME", "share" : 10.72},
+					{"id" : 4, "name" : "Symbian", "share" : 2.49},
+					{"id" : 5, "name" : "Blackberry", "share" : 2.26},
+					{"id" : 6, "name" : "Windows Phone", "share" : 1.33}
+					]
+				
+				var options = {
+					source : obj,
+					rowClass : "rowClass",
+				}
+				
+				$("#dataTable").jsonTableUpdate(options);
+				$('table.tableSorter').tableSort();
+			}
+		</script>
+	</head>
+	
+	<body>
+		<!-- background="image/bg_texture.jpg" -->
+	
+		<div class="container">
+	
+			<p class="col-xs-3">
+				Date: <input type="text" id="datepicker" class="form-control" placeholder="Saisissez la date" />
+			</p>
+			<br />
+			<button type="button" class="btn btn-primary" id="launchScript" onclick="dosomething()">Update</button>
+			
+			<table id="dataTable"
+				class="table table-hover table-striped tableSorter">
+				<thead>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+			
+			<script src="dist/js/bootstrap.min.js"></script>
+			
+			<a href="#" class="success">Register me to this session</a>
+	</body>
 </html>
