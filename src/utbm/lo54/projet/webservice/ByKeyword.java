@@ -2,6 +2,7 @@ package utbm.lo54.projet.webservice;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,8 +37,9 @@ public class ByKeyword {
 		
 		try {
 			connexion = DriverManager.getConnection( "jdbc:mysql://localhost:3306/schoolFormation", "blue", "blue" );
-			Statement statement = connexion.createStatement();
-			ResultSet resultat = statement.executeQuery( "SELECT code, title  FROM Course WHERE title like '%"+ keyword +"%';" );
+			PreparedStatement statement = connexion.prepareStatement("SELECT code, title  FROM Course WHERE title like '%?%'");
+			statement.setString(1, keyword);
+			ResultSet resultat = statement.executeQuery( "" );
 			while ( resultat.next() ) {
 				Course record = new Course(resultat.getString("code"), resultat.getString("title"));
 				courseListMatchingKeyword.add(record);
