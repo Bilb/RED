@@ -147,11 +147,7 @@
 	
 	
 		<div class="container" style="width:1000px">
-		
-		
-	
 			<br/>
-
 			<div class="btn-group btn-group-justified" data-toggle="buttons">
 				  <label class="btn btn-default">
 				    <input type="radio" name="date" id="date"><span class="glyphicon glyphicon-calendar">Date</span>
@@ -166,28 +162,18 @@
 			
 			<br/>
 			<div class="row">
-        		<div class="col-md-2">
+        		<div class="col-md-4">
 					<input type="text" id="datepicker" class="form-control" placeholder="Date" data-date-format="dd-mm-yyyy"/>
 				</div>
-				<div class="col-md-2">
-					<button type="button" class="btn btn-primary" id="launchScript" onclick="getJsonUpdateTable()">Update</button>
-				</div>
 				
-        		<div class="col-md-2">
+        		<div class="col-md-4">
 					<div class="dropdown">
-		  				<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-		    				Locations <span class="caret"></span>
-		  				</a>
-		  			<ul id="locationValues" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		  			</ul>
-					</div>	 
-					<input type="text" id="locationSaver" class="form-control" placeholder="Location" role="button" data-toggle="dropdown" data-target="#">  			
+			  			<input type="text" id="locationSaver" class="form-control" placeholder="Location" role="button" data-toggle="dropdown" data-target="#">
+			  			<ul id="locationValues" class="dropdown-menu" role="menu" aria-labelledby="dLabel"></ul>
+					</div>	  			
        			</div>
-       			<div class="col-md-2">
-					<button type="button" class="btn btn-primary" id="launchScript" onclick="getJsonUpdateTable()">Update</button>
-				</div>
         		<div class="col-md-2" >
-        			Keyword
+        			<input type="text" id="titleForm" class="form-control" placeholder="Title">
         		</div>
         		<div class="col-md-2">
 					<button type="button" class="btn btn-primary" id="launchScript" onclick="getJsonUpdateTable()">Update</button>
