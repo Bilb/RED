@@ -37,7 +37,7 @@ public class Locations {
 			DataSource datasource = (DataSource) myContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
 			connexion = datasource.getConnection();
 			Statement statement = connexion.createStatement();
-			ResultSet resultSet = statement.executeQuery("select id, city from location");
+			ResultSet resultSet = statement.executeQuery("select id, city from LOCATION");
 			
 			
 			while (resultSet.next()) {
