@@ -1,18 +1,19 @@
 
 
-[ ]	Déterminer URL pour les 4 accès. (utilisateur doit pouvoir s'inscire aussi)
+[x]	Déterminer URL pour les 4 accès. (utilisateur doit pouvoir s'inscire aussi)
 	- byKeyWord
 	- byDate
 	- byLocation
 	- subscribe
 	
-[ ] Remplir BDD avec données de tests
-[ ] Création des méthodes de traitements
-[ ] 
-[ ] 
-[ ] 
-[ ] 
-[ ] Partie client
-	[ ]	JSON pour réponses
-	[ ]	Pas de rechargement de pages : JQuery
-	
+[x] Remplir BDD avec données de tests
+[x] Création des méthodes de traitements
+
+[x]	JSON pour réponses
+
+
+[ ] Flèches visible directes
+[ ] Taille colonnes tableau
+[ ] Bouton en haut 
+[ ] Suppression tri sur colonne ajouté
+[ ]	Intégration requete url json avec bouton + rechargement live
