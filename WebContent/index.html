@@ -122,7 +122,14 @@
 					
 					$.getJSON("http://localhost:8080/RED/service/byLocation", function(json) {
 						populateLocationList($('ul'), json);
+						$("#locationValues li a").click(function(){
+
+							$("#locationSaver").val($(this).text());
+							console.log('test');	
+						 });
 					});
+					
+					
 					
 					
 				});
@@ -144,24 +151,33 @@
 			<br/>
 			
 			<div class="btn-group btn-group-justified">
-			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-calendar">Date</span></a>
-			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-pushpin">Location</span></a>
-			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-height">itle</span></a>
+			  	<a type="button" class="btn btn-default"><span class="glyphicon glyphicon-calendar">Date</span></a>
+			  	<a type="button" class="btn btn-default"><span class="glyphicon glyphicon-pushpin">Location</span></a>
+			  	<a type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-height">itle</span></a>
 			</div>
 			<br/>
+			<div class="row">
+        		<div class="col-md-4">
+        			Date
+        		</div>
+        		<div class="col-md-4">
+					<div class="dropdown">
+		  				<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+		    				Locations <span class="caret"></span>
+		  				</a>
+		
+		  			<ul id="locationValues" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		  			</ul>
+					</div>	 
+					<input type="text" id="locationSaver" class="form-control" placeholder="Location">
+					    			
+       			</div>
+        		<div class="col-md-4" >
+        			Keyword
+        		</div>
+      		</div>
 			
-			<div class="dropdown">
-		  		<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-		    		Locations <span class="caret"></span>
-		  		</a>
-		
-		
-		  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-		    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-		    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-		  		</ul>
-			</div>
+			
 			
 			<br/><br/>
 			
