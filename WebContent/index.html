@@ -123,14 +123,13 @@
 					$.getJSON("http://localhost:8080/RED/service/byLocation", function(json) {
 						populateLocationList($('ul'), json);
 						$("#locationValues li a").click(function(){
-
 							$("#locationSaver").val($(this).text());
-							console.log('test');	
-						 });
+							$.getJSON("http://localhost:8080/RED/service/byLocation/" + $(this).text(), function(data) {
+								console.log('COURSES for byLocation:');
+								console.log(data);
+							});
+						 })
 					});
-					
-					
-					
 					
 				});
 		</script>
@@ -146,7 +145,10 @@
 	
 	<body>
 	
+	
 		<div class="container" style="width:1000px">
+		
+		
 	
 			<br/>
 
@@ -179,7 +181,7 @@
 		  			<ul id="locationValues" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 		  			</ul>
 					</div>	 
-					<input type="text" id="locationSaver" class="form-control" placeholder="Location">  			
+					<input type="text" id="locationSaver" class="form-control" placeholder="Location" role="button" data-toggle="dropdown" data-target="#">  			
        			</div>
        			<div class="col-md-2">
 					<button type="button" class="btn btn-primary" id="launchScript" onclick="getJsonUpdateTable()">Update</button>
