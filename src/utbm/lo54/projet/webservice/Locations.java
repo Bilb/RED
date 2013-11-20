@@ -45,7 +45,6 @@ public class Locations {
 				String city = resultSet.getString("city");
 				Location location = new Location(id, city);
 				locations.add(location);
-				System.out.println("id = " + id + "	| city = " + city);
 			}
 		}
 		

@@ -57,43 +57,21 @@
 				}
 				
 				/* update table data from url */
-				function getJsonUpdateTable()
+				function updateTable(jsonData)
 				{
 					 $("#dataTable").jsonTable({
-						head : ['#','Operating System','Market Share', 'Subscribe'],
-						json : ['id', 'name', 'share', 'Subscribe']
+						head : ['Code','Start','End', 'Location', 'Subscribe'],
+						json : ['courseCode', 'start', 'end', 'location', 'Subscribe']
 					});
 					
-					/*var options = {
-					source : "data.json", // Can be a URL or a JSON object array
-					rowClass : "rowClass", //(optional) Class to be applied
-					callback : function() {
-						// (optional) Do something when table is updated
-						}
-					}*/
-					
-					
-					var obj = [
-						{"id" : 1, "name" : "iOS", "share" : 57.56, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-						{"id" : 2, "name" : "Android", "share" : 24.66, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-						{"id" : 3, "name" : "Java ME", "share" : 10.72, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-						{"id" : 4, "name" : "Symbian", "share" : 2.49, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-						{"id" : 5, "name" : "Blackberry", "share" : 2.26, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-						{"id" : 6, "name" : "Windows Phone", "share" : 1.33, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"}
-						]
-					
 					var options = {
-						source : obj,
+						source : jsonData,
 						rowClass : "rowClass",
 					}
-					
 					$("#dataTable").jsonTableUpdate(options);
 					
 					/* initiate table with new columns get from JSON */
 					$('table.tableSorter').tableSort();
-					
-					/*$.toast.config.align = 'right';
-					$.toast.config.width = 400;*/
 					
 					/* 	register event to display toast on click on new 
 						add button (got from JSON) */
@@ -103,32 +81,38 @@
 					});
 				}
 			
+				
+				
+				
+				
 				/* autoclose datepicker when date changed */
 				$(function() {
 					$('#datepicker').datepicker().on('changeDate', function (ev) {
 						$(this).datepicker('hide');
+						$.getJSON("http://localhost:8080/RED/service/byDate/" + $('#datepicker').val(), function(data) { 
+							updateTable(data)
 						});
+					});
 				});
 				
 				
 			
 				$(document).ready(function() {
 					/* update table data */
-					getJsonUpdateTable();
+					updateTable();
 					
 					/* initiate toasts parameters */
 					$.toast.config.align = 'right';
 					$.toast.config.width = 400;
 					
 					$.getJSON("http://localhost:8080/RED/service/byLocation", function(json) {
-						populateLocationList($('ul'), json);
-						$("#locationValues li a").click(function(){
+						populateLocationList($('#locationValues'), json);
+						$("#locationValues li a").click(function() {
 							$("#locationSaver").val($(this).text());
-							$.getJSON("http://localhost:8080/RED/service/byLocation/" + $(this).text(), function(data) {
-								console.log('COURSES for byLocation:');
-								console.log(data);
+							$.getJSON("http://localhost:8080/RED/service/byLocation/" + $(this).text(), function(data) { 
+								updateTable(data)
+								});
 							});
-						 })
 					});
 					
 				});

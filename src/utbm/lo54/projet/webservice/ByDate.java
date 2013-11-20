@@ -17,8 +17,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import utbm.lo54.projet.core.IndentObjectMapperProvider;
@@ -33,12 +33,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Audric Ackermann
  *
  */
-@Path("/byDate")
+@Path("/byDate/{KeyDate}")
 public class ByDate {
 
 	@GET 
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
-	public String getByDate(@QueryParam("date") String requestDate) {
+	public String getByDate(@PathParam("KeyDate") String requestDate) {
 
 		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
 		ObjectMapper mapper = provider.getContext(null);
