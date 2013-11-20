@@ -47,8 +47,8 @@ public class ByLocation {
 			PreparedStatement statement = connexion.prepareStatement("select "
 															+ "cs.id, cs.start, cs.end, cs.course_code, l.city "
 														+ "from "
-															+ "course_session as cs "
-																+ "inner join location as l "
+															+ "COURSE_SESSION as cs "
+																+ "inner join LOCATION as l "
 																	+ "on (cs.location_id = l.id) "
 														+ "where "
 															+ "l.city =  ? ");
