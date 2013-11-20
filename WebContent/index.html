@@ -14,14 +14,10 @@
 			  href="js/tablesorter/style.css">
 		<link rel="stylesheet"
 			  href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-		<link rel="stylesheet" 
-			  href="dist/css/bootstrap.css">
+		
 		<link rel="stylesheet" 
 			  href="dist/css/bootstrap.min.css">
-		<link rel="stylesheet" 
-			  href="dist/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" 
-			  href="dist/css/bootstrap-theme.css">
+		
 		<link rel="stylesheet" 
 			  href="datepicker/css/datepicker.css">
 			  
@@ -97,12 +93,12 @@
 				
 				
 				var obj = [
-					{"id" : 1, "name" : "iOS", "share" : 57.56, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 2, "name" : "Android", "share" : 24.66, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 3, "name" : "Java ME", "share" : 10.72, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 4, "name" : "Symbian", "share" : 2.49, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 5, "name" : "Blackberry", "share" : 2.26, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 6, "name" : "Windows Phone", "share" : 1.33, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"}
+					{"id" : 1, "name" : "iOS", "share" : 57.56, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+					{"id" : 2, "name" : "Android", "share" : 24.66, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+					{"id" : 3, "name" : "Java ME", "share" : 10.72, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+					{"id" : 4, "name" : "Symbian", "share" : 2.49, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+					{"id" : 5, "name" : "Blackberry", "share" : 2.26, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+					{"id" : 6, "name" : "Windows Phone", "share" : 1.33, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"}
 					]
 				
 				var options = {
@@ -116,7 +112,7 @@
 				$.toast.config.align = 'right';
 				$.toast.config.width = 400;
 				
-				$('.addCourseLink').click(function(){
+				$('.success').click(function(){
 					createToast($(this).attr('class'));
 					return false;
 				});
@@ -127,15 +123,15 @@
 	
 	<body>
 	
-		<div class="container">
+		<div class="container" style="width:1000px">
 	
 			<br/>
 			
-			<div class="btn-group">
-  <button type="button" class="btn btn-default">Left</button>
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
-</div>
+			<div class="btn-group btn-group-justified">
+			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-calendar">Date</span></a>
+			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-pushpin">Location</span></a>
+			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-height">itle</span></a>
+			</div>
 			
 			<br/><br/><br/>
 			
@@ -145,6 +141,7 @@
 				</div>
 				<button type="button" class="btn btn-primary" id="launchScript" onclick="dosomething()">Update</button>
 			</div>
+				
 			<br />
 			
 			<div class="panel panel-primary">
