@@ -48,6 +48,14 @@
 					$.toast('<h4>Success</h4> You are register to this session. ', options);
 				}
 				
+				function populateLocationList(select, data) {
+				    var items = [];
+				    $.each(data, function (id, option) {
+				        items.push('<li role="presentation"> <a role="menuitem" tabindex="-1" href="#">' + option.city + '</a></li>');
+				    });  
+				    select.html(items.join(''));
+				}
+				
 				/* update table data from url */
 				function getJsonUpdateTable()
 				{
@@ -112,6 +120,11 @@
 					$.toast.config.align = 'right';
 					$.toast.config.width = 400;
 					
+					$.getJSON("http://localhost:8080/RED/service/byLocation", function(json) {
+						populateLocationList($('ul'), json);
+					});
+					
+					
 				});
 		</script>
 		
@@ -135,8 +148,22 @@
 			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-pushpin">Location</span></a>
 			  <a type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-height">itle</span></a>
 			</div>
+			<br/>
 			
-			<br/><br/><br/>
+			<div class="dropdown">
+		  		<a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+		    		Locations <span class="caret"></span>
+		  		</a>
+		
+		
+		  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+		    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+		    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+		  		</ul>
+			</div>
+			
+			<br/><br/>
 			
 			<div class="row">
 				<div class="col-xs-3" >
@@ -163,6 +190,8 @@
 			<script src="dist/js/bootstrap.min.js"></script>
 			
 			<script type="text/javascript">$('.datepicker').datepicker({todayHighlight:"true"})</script>
+			
+			
 			
 
 			
