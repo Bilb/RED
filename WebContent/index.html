@@ -37,86 +37,93 @@
 				src="js/toast/jquery.toast.min.js">
 		</script>
 		
-		<script type="text/javascript">
-			function createToast(t){
-				var options = {
-					duration: 5000,
-					sticky: false,
-					type: t
-				};
-				
-				$.toast('<h4>Success</h4> You are register to this session. ', options);
-			}
-			
-			$(document).ready(function(){
-				$.toast.config.align = 'right';
-				$.toast.config.width = 400;
-				
-			});
-		</script>
+		
 		
 		<script type="text/javascript">
-				$(document).ready(function() {
+			
+				/* creates and displays a toast message */
+				function createToast(t){
+					var options = {
+						duration: 5000,
+						sticky: false,
+						type: t
+					};
+					
+					$.toast('<h4>Success</h4> You are register to this session. ', options);
+				}
+				
+				/* update table data from url */
+				function getJsonUpdateTable()
+				{
+					 $("#dataTable").jsonTable({
+						head : ['#','Operating System','Market Share', 'Subscribe'],
+						json : ['id', 'name', 'share', 'Subscribe']
+					});
+					
+					/*var options = {
+					source : "data.json", // Can be a URL or a JSON object array
+					rowClass : "rowClass", //(optional) Class to be applied
+					callback : function() {
+						// (optional) Do something when table is updated
+						}
+					}*/
+					
+					
+					var obj = [
+						{"id" : 1, "name" : "iOS", "share" : 57.56, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+						{"id" : 2, "name" : "Android", "share" : 24.66, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+						{"id" : 3, "name" : "Java ME", "share" : 10.72, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+						{"id" : 4, "name" : "Symbian", "share" : 2.49, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+						{"id" : 5, "name" : "Blackberry", "share" : 2.26, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
+						{"id" : 6, "name" : "Windows Phone", "share" : 1.33, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"}
+						]
+					
+					var options = {
+						source : obj,
+						rowClass : "rowClass",
+					}
+					
+					$("#dataTable").jsonTableUpdate(options);
+					
+					/* initiate table with new columns get from JSON */
 					$('table.tableSorter').tableSort();
+					
+					/*$.toast.config.align = 'right';
+					$.toast.config.width = 400;*/
+					
+					/* 	register event to display toast on click on new 
+						add button (got from JSON) */
+					$('.success').click(function(){
+						createToast($(this).attr('class'));
+						return false;
+					});
+				}
+			
+				/* autoclose datepicker when date changed */
+				$(function() {
+					$('#datepicker').datepicker().on('changeDate', function (ev) {
+						$(this).datepicker('hide');
+						});
+				});
+				
+				
+			
+				$(document).ready(function() {
+					/* update table data */
+					getJsonUpdateTable();
+					
+					/* initiate toasts parameters */
+					$.toast.config.align = 'right';
+					$.toast.config.width = 400;
+					
 				});
 		</script>
 		
-		<script>
-			  $(function() {
-				$( "#datepicker" ).datepicker({
-					showButtonPanel: true
-					});
-					$( "#anim" ).change(function() {
-						$( "#datepicker" ).datepicker( "option", "showAnim", "fold" );
-						$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yyyy" );
-					});
-			  });
-		</script>
-
+		
 		<script type="text/javascript" src="datepicker/js/bootstrap-datepicker.js"></script>
 
 		<script type="text/javascript">
-			function dosomething()
-			{
-				 $("#dataTable").jsonTable({
-	                head : ['#','Operating System','Market Share', 'Subscribe'],
-	                json : ['id', 'name', 'share', 'Subscribe']
-				});
-				
-				/*var options = {
-				source : "data.json", // Can be a URL or a JSON object array
-				rowClass : "rowClass", //(optional) Class to be applied
-				callback : function() {
-					// (optional) Do something when table is updated
-					}
-				}*/
-				
-				
-				var obj = [
-					{"id" : 1, "name" : "iOS", "share" : 57.56, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 2, "name" : "Android", "share" : 24.66, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 3, "name" : "Java ME", "share" : 10.72, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 4, "name" : "Symbian", "share" : 2.49, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 5, "name" : "Blackberry", "share" : 2.26, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"},
-					{"id" : 6, "name" : "Windows Phone", "share" : 1.33, "Subscribe" : "<button type=\"button\" class=\"btn btn-default btn-lg success\"><span class=\"glyphicon glyphicon-plus-sign\"></span> </button>"}
-					]
-				
-				var options = {
-					source : obj,
-					rowClass : "rowClass",
-				}
-				
-				$("#dataTable").jsonTableUpdate(options);
-				$('table.tableSorter').tableSort();
-				
-				$.toast.config.align = 'right';
-				$.toast.config.width = 400;
-				
-				$('.success').click(function(){
-					createToast($(this).attr('class'));
-					return false;
-				});
-			}
+			
 		</script>
 		
 	</head>
