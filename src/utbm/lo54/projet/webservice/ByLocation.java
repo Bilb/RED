@@ -35,7 +35,6 @@ public class ByLocation {
 		ObjectMapper mapper = provider.getContext(null);
 
 		Connection connexion = null;
-		StringBuilder string = new StringBuilder();
 		List<Record> records = new ArrayList<Record>();
 
 		try {
@@ -60,8 +59,8 @@ public class ByLocation {
 			
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
-				Date start = resultSet.getDate("start");
-				Date end = resultSet.getDate("end");
+				String start = resultSet.getString("start");
+				String end = resultSet.getString("end");
 				String course_code = resultSet.getString("course_code");
 				String title = resultSet.getString("title");
 				String location = resultSet.getString("city");
@@ -93,6 +92,6 @@ public class ByLocation {
 			e.printStackTrace();
 		}
 
-		return string.toString();
+		return "[ ]";
 	}
 }

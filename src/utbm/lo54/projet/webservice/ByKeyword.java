@@ -1,11 +1,9 @@
 package utbm.lo54.projet.webservice;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +17,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import utbm.lo54.projet.core.IndentObjectMapperProvider;
+import utbm.lo54.projet.model.Record;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import utbm.lo54.projet.model.Course;
-import utbm.lo54.projet.model.Record;
 
 @Path("/byKeyword/{keyword}")
 public class ByKeyword {
@@ -79,7 +77,8 @@ public class ByKeyword {
 		}
 
 		// Converting to json format
-		ObjectMapper mapper = new ObjectMapper();
+		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
+		ObjectMapper mapper = provider.getContext(null);
 		try {
 			return mapper.writeValueAsString(courseListMatchingKeyword);
 		} catch (JsonProcessingException e) {
