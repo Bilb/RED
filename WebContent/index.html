@@ -131,10 +131,13 @@
 				/* autoclose datepicker when date changed */
 				$(function() {
 					$('#datepicker').datepicker().on('changeDate', function (ev) {
-						$(this).datepicker('hide');
-						$.getJSON("http://localhost:8080/RED/service/byDate/" + $('#datepicker').val(), function(data) { 
-							updateTable(data);
-						});
+						if(ev.viewMode === 'days'){
+							$(this).datepicker('hide');
+							$.getJSON("http://localhost:8080/RED/service/byDate/" + $('#datepicker').val(), function(data) { 
+								updateTable(data);
+							});
+						}
+						
 					});
 				});
 				
