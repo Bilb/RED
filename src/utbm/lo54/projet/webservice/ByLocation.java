@@ -51,7 +51,7 @@ public class ByLocation {
 																+ "inner join LOCATION as l "
 																	+ "on (cs.location_id = l.id) "
 																+ "inner join COURSE as c "
-																	+ "on (cs.course_code = c.course_code) "
+																	+ "on (cs.course_code = c.code) "
 														+ "where "
 															+ "l.city =  ? ");
 			statement.setString(1,KeyLocation);
