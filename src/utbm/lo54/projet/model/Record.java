@@ -9,28 +9,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
-public class ByDateRecord {
+public class Record {
 
 	private int id;
 	private Date start;
 	private Date end;
 	private String courseCode;
 	private String title;
+	private String location;
 
 
 
-	public ByDateRecord(int id, Date start, Date end, String courseCode,
-			String title) {
+	public Record(int id, Date start, Date end, String courseCode,
+			String title, String location) {
 		super();
 		this.id = id;
 		this.start = start;
 		this.end = end;
 		this.courseCode = courseCode;
 		this.title = title;
+		this.location = location;
 	}
 
-	public ByDateRecord(int id, String start, String end, String courseCode,
-			String title) {
+	public Record(int id, String start, String end, String courseCode,
+			String title, String location) {
 		super();
 		this.id = id;
 		DateFormat encodeForSql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -44,6 +46,7 @@ public class ByDateRecord {
 		}
 		this.courseCode = courseCode;
 		this.title = title;
+		this.location = location;
 	}
 
 
@@ -78,6 +81,13 @@ public class ByDateRecord {
 		this.title = title;
 	}
 
+	public String getLocation() {
+		return location;
+	}
+	
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 
 
