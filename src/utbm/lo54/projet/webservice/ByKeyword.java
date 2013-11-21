@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import utbm.lo54.projet.model.Course;
+import utbm.lo54.projet.model.Record;
 
 @Path("/byKeyword/{keyword}")
 public class ByKeyword {
@@ -32,7 +33,7 @@ public class ByKeyword {
 	public String getFormationList(@PathParam("keyword") String keyword) {
 
 		Connection connexion = null;
-		List<Course> courseListMatchingKeyword = new ArrayList<Record>();
+		List<Record> courseListMatchingKeyword = new ArrayList<Record>();
 
 		try {
 
@@ -55,8 +56,8 @@ public class ByKeyword {
 			statement.setString(1, keyword);
 			ResultSet resultat = statement.executeQuery();
 			while ( resultat.next() ) {
-				Record record = new Record(resultat.getInt(1), resultat.getString(2), resultat.getString(3),
-											resultat.getString(4), resultat.getString(5), resultat.getString(6));
+				Record record = new Record(resultat.getInt(1), resultat.getString(5), resultat.getString(6),
+											resultat.getString(2), resultat.getString(3), resultat.getString(4));
 				courseListMatchingKeyword.add(record);
 			}
 
