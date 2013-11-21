@@ -58,22 +58,32 @@
 				    });  
 				    select.html(items.join(''));
 				}
+							
+				function susbcribe(course_session_id) {
+				    alert('susbcribe to course_session_id:' + course_session_id+ ' TODO !');
+				}
 				
-
 
 				/* update table data from url */
 				function updateTable(jsonData)
 				{
 					 $("#dataTable").jsonTable({
-							head : ['Code','Title','Start','End', 'Location', 'Subscribe'],
-							json : ['courseCode','title', 'start', 'end', 'location', 'Subscribe']
-						});
+						head : ['Code','Title','Start','End', 'Location', 'Subscribe'],
+						json : ['courseCode','title', 'start', 'end', 'location', 'Subscribe']
+					});
 					
 					
+					jQuery.each(jsonData, function(i, val) {
+						//console.log(val['id']);
+						val['Subscribe']="<button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"susbcribe("+val['id'] + ")\"><span class=\"glyphicon glyphicon-plus-sign\"></span></button>";
+					});
+					
+				
 					var options = {
 						source : jsonData,
 						rowClass : "rowClass",
 					}
+					
 					$("#dataTable").jsonTableUpdate(options);
 					
 					/* initiate table with new columns get from JSON */
@@ -92,30 +102,31 @@
 					searchTypeSelection = id;
 					switch(searchTypeSelection) {
 					case 0:
-						document.getElementById('titleForm').disabled=true;
-						document.getElementById('locationSaver').disabled=true;
-						document.getElementById('launchScript').disabled=true;
-						document.getElementById('datepicker').disabled=false;
+						document.getElementById('titleForm').style.display = 'none';
+						document.getElementById('locationSaver').style.display = 'none';
+						document.getElementById('launchScript').style.display = 'none';
+						document.getElementById('datepicker').style.display = 'inline';
 						break;
 					case 1:
-						document.getElementById('titleForm').disabled=true;
-						document.getElementById('locationSaver').disabled=false;
-						document.getElementById('launchScript').disabled=true;
-						document.getElementById('datepicker').disabled=true;
+						document.getElementById('titleForm').style.display = 'none';
+						document.getElementById('locationSaver').style.display = 'inline';
+						document.getElementById('launchScript').style.display = 'none';
+						document.getElementById('datepicker').style.display = 'none';
 						break;
 					case 2:
-						document.getElementById('titleForm').disabled=false;
-						document.getElementById('locationSaver').disabled=true;
-						document.getElementById('launchScript').disabled=false;
-						document.getElementById('datepicker').disabled=true;
+						document.getElementById('titleForm').style.display = 'inline';
+						document.getElementById('locationSaver').style.display = 'none';
+						document.getElementById('launchScript').style.display = 'inline';
+						document.getElementById('datepicker').style.display = 'none';
 						break;
 					}
 				}
 				
 				function getJsonUpdateTable() {
 					if (searchTypeSelection == 2) {
-						$.getJSON("http://localhost:8080/RED/service/byKeyword/" + document.getElementById('titleForm').value, function(data) { 
-							updateTable(data)
+						$.getJSON("http://localhost:8080/RED/service/byKeyword/" + document.getElementById('titleForm').value, function(data) {
+							
+							updateTable(data);
 							});
 					}
 				}
@@ -154,7 +165,7 @@
 					$('#datepicker').datepicker().on('changeDate', function (ev) {
 						$(this).datepicker('hide');
 						$.getJSON("http://localhost:8080/RED/service/byDate/" + $('#datepicker').val(), function(data) { 
-							updateTable(data)
+							updateTable(data);
 						});
 					});
 				});
@@ -163,7 +174,7 @@
 				$(document).ready(function() {
 
 					/* update table data */
-					updateTable();
+					//updateTable();
 					
 					/* initiate toasts parameters */
 					$.toast.config.align = 'right';
@@ -238,6 +249,8 @@
     </div>
 </div>
 		<div class="container" style="width:1000px">
+		
+		
 			<br/>
 			
        
@@ -245,7 +258,7 @@
 				  <label class="btn btn-default" onclick="setSearch(0);">
 				    <input type="radio" name="date" id="date"><span class="glyphicon glyphicon-calendar">Date</span>
 				  </label>
-				  <label class="btn btn-default" onclick="setSearch(1);">
+				  <label class="btn btn-default active" onclick="setSearch(1);">
 				    <input type="radio" name="location" id="location"><span class="glyphicon glyphicon-pushpin">Location</span>
 				  </label>
 				  <label class="btn btn-default" onclick="setSearch(2);">
@@ -256,12 +269,12 @@
 			<br/>
 			<div class="row">
         		<div class="col-md-4">
-					<input type="text" id="datepicker" class="form-control" placeholder="Date" data-date-format="dd-mm-yyyy"/>
+					<input type="text" id="datepicker" class="form-control" placeholder="Date" data-date-format="dd-mm-yyyy">
 				</div>
 				
         		<div class="col-md-4">
 					<div class="dropdown">
-			  			<input type="text" id="locationSaver" class="form-control" placeholder="Location" role="button" data-toggle="dropdown" data-target="#">
+			  			<input type="text" id="locationSaver" class="form-control" placeholder="Location" role="button" data-toggle="dropdown" data-target="#" checked>
 			  			<ul id="locationValues" class="dropdown-menu" role="menu" aria-labelledby="dLabel"></ul>
 					</div>	  			
        			</div>
