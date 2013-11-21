@@ -20,6 +20,9 @@
 		<script type="text/javascript"
 				src="js/jquery/jquery-1.10.2.min.js">
 		</script>
+		<script type="text/javascript"
+				src="/js/jquery-cookie/jquery.cookie.js">
+		</script>
 		<script type="text/javascript" 
 				src="js/tablesorter/tsort.min.js">
 		</script>
@@ -117,6 +120,34 @@
 					}
 				}
 				
+				function setUserCookie(lastname,firstname,address,email,phone)
+				{
+					$.cookie('lastname',lastname);
+					$.cookie('firstname',firstname);
+					$.cookie('address',address);
+					$.cookie('email',email);
+					$.cookie('phone',phone);
+				}
+				
+				function subscribe(sessionid) {
+					// checking if we have user info
+					if($.cookie('lastname') == null) {
+						$('#myModal').modal({
+							  show: true
+							})
+					}
+					else {
+						$.getJSON("http://localhost:8080/RED/service/Subscribe/" 
+								+ sessionid + "/"
+								+ $.cookie('lastname') + "/"
+								+ $.cookie('firstname')+ "/"
+								+ $.cookie('address') +"/"
+								+ $.cookie('email') +"/"
+								+ $.cookie('phone')	
+						);
+					}
+					
+				}
 				
 				/* autoclose datepicker when date changed */
 				$(function() {
@@ -130,6 +161,7 @@
 				
 				
 				$(document).ready(function() {
+
 					/* update table data */
 					updateTable();
 					
@@ -157,9 +189,58 @@
 	</head>
 	
 	<body>   
-  
+  <!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+ 
+ 	
+<!-- Modal -->
+<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            <h4 class="modal-title" id="myModalLabel">Entrez vos informations</h4>
+          </div>
+          <div class="modal-body">
+			<div class="input-group">
+			  <span class="input-group-addon">Nom</span>
+			  <input id="lastname" type="text" class="form-control" placeholder="Nom">
+			</div>
+			</br>
+			<div class="input-group">
+			  <span class="input-group-addon">Prénom</span>
+			  <input id="firstname" type="text" class="form-control" placeholder="Prénom">
+			</div>
+			</br>
+			<div class="input-group">
+				<span class="input-group-addon">Adresse</span>
+			  <input id="address" type="text" class="form-control" placeholder="Adresse">
+			</div>
+			</br>
+			<div class="input-group">
+			  <span class="input-group-addon">Téléphone</span>
+			  <input id="phone" type="text" class="form-control" placeholder="Téléphone">
+			</div>
+			</br>
+			<div class="input-group">
+			  <span class="input-group-addon">Email</span>
+			  <input id="email" type="text" class="form-control" placeholder="Email">
+			</div>
+          	</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            <button id="userinfobtn" type="button" class="btn btn-primary">Valider</button>
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+</div>
 		<div class="container" style="width:1000px">
 			<br/>
+			
+       
 			<div class="btn-group btn-group-justified" data-toggle="buttons">
 				  <label class="btn btn-default" onclick="setSearch(0);">
 				    <input type="radio" name="date" id="date"><span class="glyphicon glyphicon-calendar">Date</span>
