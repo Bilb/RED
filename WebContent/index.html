@@ -56,6 +56,11 @@
 				    select.html(items.join(''));
 				}
 				
+				
+				function susbcribe(course_session_id) {
+				    alert('susbcribe to course_session_id:' + course_session_id+ ' TODO !');
+				}
+				
 				/* update table data from url */
 				function updateTable(jsonData)
 				{
@@ -63,7 +68,15 @@
 						head : ['Code','Start','End', 'Location', 'Subscribe'],
 						json : ['courseCode', 'start', 'end', 'location', 'Subscribe']
 					});
+					 
+					 
+						
 					
+					jQuery.each(jsonData, function(i, val) {
+						//console.log(val['id']);
+						val['Subscribe']="<button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"susbcribe("+val['id'] + ")\"><span class=\"glyphicon glyphicon-plus-sign\"></span></button>";
+					});
+				
 					var options = {
 						source : jsonData,
 						rowClass : "rowClass",
@@ -99,7 +112,7 @@
 			
 				$(document).ready(function() {
 					/* update table data */
-					updateTable();
+					//updateTable();
 					
 					/* initiate toasts parameters */
 					$.toast.config.align = 'right';
@@ -131,6 +144,8 @@
 	
 	
 		<div class="container" style="width:1000px">
+		
+		
 			<br/>
 			<div class="btn-group btn-group-justified" data-toggle="buttons">
 				  <label class="btn btn-default">
