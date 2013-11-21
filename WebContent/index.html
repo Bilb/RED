@@ -80,7 +80,7 @@
 						source : jsonData,
 						rowClass : "rowClass",
 					}
-					
+					document.getElementById("dataTable").style.height = "10px";
 					$("#dataTable").jsonTableUpdate(options);
 					
 					/* initiate table with new columns get from JSON */
@@ -212,7 +212,7 @@
 				
 			<br />
 			
-			<div class="panel panel-primary">
+			<div id="panelData" class="panel panel-primary">
 				<div class="panel-heading">Course Sessions</div>
  
 				<table id="dataTable"
