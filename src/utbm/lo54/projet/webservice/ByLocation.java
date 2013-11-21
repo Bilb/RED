@@ -45,11 +45,13 @@ public class ByLocation {
 			
 			
 			PreparedStatement statement = connexion.prepareStatement("select "
-															+ "cs.id, cs.start, cs.end, cs.course_code, l.city "
+															+ "cs.id, c.title, cs.start, cs.end, cs.course_code, l.city "
 														+ "from "
 															+ "COURSE_SESSION as cs "
 																+ "inner join LOCATION as l "
 																	+ "on (cs.location_id = l.id) "
+																+ "inner join COURSE as c "
+																	+ "on (cs.course_code = c.code) "
 														+ "where "
 															+ "l.city =  ? ");
 			statement.setString(1,KeyLocation);
@@ -61,10 +63,11 @@ public class ByLocation {
 				Date start = resultSet.getDate("start");
 				Date end = resultSet.getDate("end");
 				String course_code = resultSet.getString("course_code");
+				String title = resultSet.getString("title");
 				String location = resultSet.getString("city");
+
 				Record record = new Record(id, start, end, course_code, title, location);
 				records.add(record);
-				// string.append("id = " + id + "	| start = " + start + "	| end = " + end + "	| course_code = " + course_code + "	| location_id = " + location + "\n");
 			}
 		}
 		
