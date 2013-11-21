@@ -39,14 +39,14 @@
 				var course_id = -1;
 				
 				/* creates and displays a toast message */
-				function createToast(t){
+				function createToast(){
 					var options = {
 						duration: 5000,
 						sticky: false,
-						type: t
+						type: "success"
 					};
 					
-					$.toast('<h4>Success</h4> You are register to this session. ', options);
+					$.toast('<h4>Success</h4> You\'ve been add to this course session.', options);
 				}
 				
 				function populateLocationList(select, data) {
@@ -120,7 +120,8 @@
 							function (data) {}	
 						);
 						// trigger popup
-						alert('Inscription r\351ussie !');
+						//alert('Inscription r\351ussie !');
+						createToast();
 						course_id=-1;
 						
 				  	}
@@ -156,13 +157,6 @@
 					
 					/* initiate table with new columns get from JSON */
 					$('table.tableSorter').tableSort();
-					
-					/* 	register event to display toast on click on new 
-						add button (got from JSON) */
-					$('.success').click(function(){
-						createToast($(this).attr('class'));
-						return false;
-					});
 				}
 			
 				
