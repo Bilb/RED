@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import utbm.lo54.projet.core.IndentObjectMapperProvider;
-import utbm.lo54.projet.model.ByDateRecord;
+import utbm.lo54.projet.model.Record;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +44,7 @@ public class ByDate {
 		ObjectMapper mapper = provider.getContext(null);
 
 
-		List<ByDateRecord> records = new ArrayList<ByDateRecord>();
+		List<Record> records = new ArrayList<Record>();
 		DateFormat decodeFromQuery = new SimpleDateFormat("dd-MM-yyyy");
 		
 
@@ -55,9 +55,10 @@ public class ByDate {
 			DataSource dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
 			Connection con = dataSource.getConnection();
 
-			PreparedStatement stmt = con.prepareStatement("SELECT ID, START, END, "
-					+ "COURSE_CODE, TITLE FROM COURSE_SESSION AS ses "
+			PreparedStatement stmt = con.prepareStatement("SELECT ses.ID, START, END, "
+					+ "COURSE_CODE, TITLE, CITY FROM COURSE_SESSION AS ses "
 					+ "INNER JOIN COURSE AS crs ON ses.COURSE_CODE=crs.CODE "
+					+ "INNER JOIN LOCATION AS loc ON loc.ID=ses.LOCATION_ID "
 					+ "WHERE START LIKE ?");
 
 			DateFormat encodeForSql = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,8 +67,9 @@ public class ByDate {
 
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				ByDateRecord record = new ByDateRecord(rs.getInt(1), rs.getString(2), 
-						rs.getString(3), rs.getString(4), rs.getString(5));
+				System.out.println("id:" + rs.getString(6));
+				Record record = new Record(rs.getInt(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 				records.add(record);
 			}
 

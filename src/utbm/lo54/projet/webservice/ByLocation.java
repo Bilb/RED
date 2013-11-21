@@ -18,7 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import utbm.lo54.projet.core.IndentObjectMapperProvider;
-import utbm.lo54.projet.model.ByLocationRecord;
+import utbm.lo54.projet.model.Record;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +36,7 @@ public class ByLocation {
 
 		Connection connexion = null;
 		StringBuilder string = new StringBuilder();
-		List<ByLocationRecord> records = new ArrayList<ByLocationRecord>();
+		List<Record> records = new ArrayList<Record>();
 
 		try {
 			Context myContext = new InitialContext();
@@ -45,11 +45,13 @@ public class ByLocation {
 			
 			
 			PreparedStatement statement = connexion.prepareStatement("select "
-															+ "cs.id, cs.start, cs.end, cs.course_code, l.city "
+															+ "cs.id, c.title, cs.start, cs.end, cs.course_code, l.city "
 														+ "from "
 															+ "COURSE_SESSION as cs "
 																+ "inner join LOCATION as l "
 																	+ "on (cs.location_id = l.id) "
+																+ "inner join COURSE as c "
+																	+ "on (cs.course_code = c.course_code) "
 														+ "where "
 															+ "l.city =  ? ");
 			statement.setString(1,KeyLocation);
@@ -61,10 +63,11 @@ public class ByLocation {
 				Date start = resultSet.getDate("start");
 				Date end = resultSet.getDate("end");
 				String course_code = resultSet.getString("course_code");
+				String title = resultSet.getString("title");
 				String location = resultSet.getString("city");
-				ByLocationRecord record = new ByLocationRecord(id,start,end,course_code,location);
+
+				Record record = new Record(id, start, end, course_code, title, location);
 				records.add(record);
-				string.append("id = " + id + "	| start = " + start + "	| end = " + end + "	| course_code = " + course_code + "	| location_id = " + location + "\n");
 			}
 		}
 		
