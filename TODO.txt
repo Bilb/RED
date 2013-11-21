@@ -12,7 +12,7 @@
 [x]	JSON pour réponses
 
 
-[x] Flèches visible directes
+[ ] Flèches visible directes
 [x] Taille colonnes tableau
 [x] Bouton en haut 
 [x] Suppression tri sur colonne ajouté

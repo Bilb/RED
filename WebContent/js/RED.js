@@ -20,6 +20,7 @@ function populateLocationList(select, data) {
     select.html(items.join(''));
 }
 
+
 function setCookie(c_name,value,exdays)
 {
 	var exdate=new Date();
@@ -106,10 +107,9 @@ function updateTable(jsonData)
 	
 	jQuery.each(jsonData, function(i, val) {
 		val['Subscribe']="<button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"subscribe("+val['id'] + ");\"><span class=\"glyphicon glyphicon-plus-sign\"></span></button>";
-
 	});
 	
-
+	
 	var options = {
 		source : jsonData,
 		rowClass : "rowClass"
@@ -119,6 +119,7 @@ function updateTable(jsonData)
 	
 	/* initiate table with new columns get from JSON */
 	$('table.tableSorter').tableSort();
+
 }
 
 

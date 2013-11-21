@@ -1,7 +1,6 @@
 package utbm.lo54.projet.webservice;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -66,7 +65,7 @@ public class Subscribe {
 			}
 		}
 
-		return "utilisateur " + lastName + " inscrit à la session num " + sessionId;
+		return "utilisateur " + lastName + " inscrit ï¿½ la session num " + sessionId;
 	}
 }
 
