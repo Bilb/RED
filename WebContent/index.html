@@ -34,9 +34,9 @@
 		</script>
 		
 		
-		
 		<script type="text/javascript">
-			
+				var searchTypeSelection = 1;
+				
 				/* creates and displays a toast message */
 				function createToast(t){
 					var options = {
@@ -56,13 +56,16 @@
 				    select.html(items.join(''));
 				}
 				
+
+
 				/* update table data from url */
 				function updateTable(jsonData)
 				{
 					 $("#dataTable").jsonTable({
-						head : ['Code','Start','End', 'Location', 'Subscribe'],
-						json : ['courseCode', 'start', 'end', 'location', 'Subscribe']
-					});
+							head : ['Code','Title','Start','End', 'Location', 'Subscribe'],
+							json : ['courseCode','title', 'start', 'end', 'location', 'Subscribe']
+						});
+					
 					
 					var options = {
 						source : jsonData,
@@ -82,7 +85,37 @@
 				}
 			
 				
+				function setSearch(id) {
+					searchTypeSelection = id;
+					switch(searchTypeSelection) {
+					case 0:
+						document.getElementById('titleForm').disabled=true;
+						document.getElementById('locationSaver').disabled=true;
+						document.getElementById('launchScript').disabled=true;
+						document.getElementById('datepicker').disabled=false;
+						break;
+					case 1:
+						document.getElementById('titleForm').disabled=true;
+						document.getElementById('locationSaver').disabled=false;
+						document.getElementById('launchScript').disabled=true;
+						document.getElementById('datepicker').disabled=true;
+						break;
+					case 2:
+						document.getElementById('titleForm').disabled=false;
+						document.getElementById('locationSaver').disabled=true;
+						document.getElementById('launchScript').disabled=false;
+						document.getElementById('datepicker').disabled=true;
+						break;
+					}
+				}
 				
+				function getJsonUpdateTable() {
+					if (searchTypeSelection == 2) {
+						$.getJSON("http://localhost:8080/RED/service/byKeyword/" + document.getElementById('titleForm').value, function(data) { 
+							updateTable(data)
+							});
+					}
+				}
 				
 				
 				/* autoclose datepicker when date changed */
@@ -96,7 +129,6 @@
 				});
 				
 				
-			
 				$(document).ready(function() {
 					/* update table data */
 					updateTable();
@@ -114,32 +146,28 @@
 								});
 							});
 					});
-					
+					setSearch(searchTypeSelection);
 				});
+				
 		</script>
 		
 		
 		<script type="text/javascript" src="datepicker/js/bootstrap-datepicker.js"></script>
 
-		<script type="text/javascript">
-			
-		</script>
-		
 	</head>
 	
-	<body>
-	
-	
+	<body>   
+  
 		<div class="container" style="width:1000px">
 			<br/>
 			<div class="btn-group btn-group-justified" data-toggle="buttons">
-				  <label class="btn btn-default">
+				  <label class="btn btn-default" onclick="setSearch(0);">
 				    <input type="radio" name="date" id="date"><span class="glyphicon glyphicon-calendar">Date</span>
 				  </label>
-				  <label class="btn btn-default">
+				  <label class="btn btn-default" onclick="setSearch(1);">
 				    <input type="radio" name="location" id="location"><span class="glyphicon glyphicon-pushpin">Location</span>
 				  </label>
-				  <label class="btn btn-default">
+				  <label class="btn btn-default" onclick="setSearch(2);">
 				    <input type="radio" name="title" id="title"><span class="glyphicon glyphicon-text-height">itle</span>
 				  </label>
 			</div>
@@ -160,12 +188,11 @@
         			<input type="text" id="titleForm" class="form-control" placeholder="Title">
         		</div>
         		<div class="col-md-2">
-					<button type="button" class="btn btn-primary" id="launchScript" onclick="getJsonUpdateTable()">Update</button>
+					<button type="button" class="btn btn-primary" id="launchScript" onclick="getJsonUpdateTable();">Update</button>
 				</div>
       		</div>
 			
-			
-			
+
 			<br/><br/>
 			
 			
@@ -183,14 +210,15 @@
 					</tbody>
 				</table>
 			</div>
+			
+						
 		</div>
 			
 			<script src="dist/js/bootstrap.min.js"></script>
 			
 			<script type="text/javascript">$('.datepicker').datepicker({todayHighlight:"true"})</script>
 			
-			
-			
+
 
 			
 	</body>
