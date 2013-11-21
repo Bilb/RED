@@ -142,8 +142,8 @@
 					
 					
 					jQuery.each(jsonData, function(i, val) {
-						//console.log(val['id']);
 						val['Subscribe']="<button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"subscribe("+val['id'] + ");\"><span class=\"glyphicon glyphicon-plus-sign\"></span></button>";
+
 					});
 					
 				
@@ -151,7 +151,7 @@
 						source : jsonData,
 						rowClass : "rowClass",
 					}
-					
+					document.getElementById("dataTable").style.height = "10px";
 					$("#dataTable").jsonTableUpdate(options);
 					
 					/* initiate table with new columns get from JSON */
@@ -204,10 +204,13 @@
 				/* autoclose datepicker when date changed */
 				$(function() {
 					$('#datepicker').datepicker().on('changeDate', function (ev) {
-						$(this).datepicker('hide');
-						$.getJSON("http://localhost:8080/RED/service/byDate/" + $('#datepicker').val(), function(data) { 
-							updateTable(data);
-						});
+						if(ev.viewMode === 'days'){
+							$(this).datepicker('hide');
+							$.getJSON("http://localhost:8080/RED/service/byDate/" + $('#datepicker').val(), function(data) { 
+								updateTable(data);
+							});
+						}
+						
 					});
 				});
 				
@@ -244,7 +247,9 @@
  	
 
 		<div class="container" style="width:1000px">
-		
+			<div class="page-header">
+	  			<h1>School Formation <small>Subscribe to your courses !</small></h1>
+			</div>
 		
 			<br/>
 			
@@ -288,9 +293,12 @@
 				
 			<br />
 			
-			<div class="panel panel-primary">
-				<div class="panel-heading">Course Sessions</div>
- 
+
+			<div id="panelData" class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Course Sessions</h3>
+				</div>
+				
 				<table id="dataTable"
 					class="table table-hover table-striped tableSorter">
 					<thead>
@@ -298,9 +306,7 @@
 					<tbody>
 					</tbody>
 				</table>
-			</div>
-			
-						
+			</div>		
 		</div>
 			
 			<script src="dist/js/bootstrap.min.js"></script>
