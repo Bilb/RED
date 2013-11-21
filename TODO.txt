@@ -12,8 +12,10 @@
 [x]	JSON pour réponses
 
 
-[ ] Flèches visible directes
-[ ] Taille colonnes tableau
-[ ] Bouton en haut 
-[ ] Suppression tri sur colonne ajouté
-[ ]	Intégration requete url json avec bouton + rechargement live
+[x] Flèches visible directes
+[x] Taille colonnes tableau
+[x] Bouton en haut 
+[x] Suppression tri sur colonne ajouté
+[x]	Intégration requete url json avec bouton + rechargement live
+[ ]	recherche en live sur ajout d'un caractère dans le champ title
+	

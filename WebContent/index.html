@@ -210,10 +210,6 @@
 				
 				
 				$(document).ready(function() {
-
-					/* update table data */
-					//updateTable();
-					
 					/* initiate toasts parameters */
 					$.toast.config.align = 'right';
 					$.toast.config.width = 400;
@@ -228,6 +224,13 @@
 							});
 					});
 					setSearch(searchTypeSelection);
+					$('#titleForm').keydown(function(event){
+					    if(event.keyCode == 13) {
+					    	getJsonUpdateTable();
+					      return false;
+					    }
+					  });
+					
 				});
 				
 		</script>
