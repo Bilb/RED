@@ -17,5 +17,7 @@
 [x] Bouton en haut 
 [x] Suppression tri sur colonne ajouté
 [x]	Intégration requete url json avec bouton + rechargement live
-[ ]	recherche en live sur ajout d'un caractère dans le champ title
+[x]	recherche sur press enter du titleform
+[ ]	Erreur en SQL qui remonte pas jusqu'à l'user si il s'enregistre avec de la merde.
+[ ] Commentaires JAVA + JAVASCRIPT + HTML
 	
