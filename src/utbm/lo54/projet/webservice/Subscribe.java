@@ -13,11 +13,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 @Path("/subscribe/{session}/{lastName}/{firstName}/{address}/{phone}/{email}")
 public class Subscribe {
 	@GET
-	@Produces("text/plain")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String registerSubscription(
 			@PathParam("session") 		int			sessionId	,
 			@PathParam("lastName") 		String		lastName	,
@@ -44,12 +45,6 @@ public class Subscribe {
 					+ " VALUES (?, ?, ?, ?, ?, ?)"
 					);
 			statement.setString(1, lastName);
-			System.out.println("lastname: " + lastName);
-			System.out.println("firstname: " + firstName);
-			System.out.println("address: " + address);
-			System.out.println("phone: " + phone);
-			System.out.println("email: " + email);
-			System.out.println("session: " + sessionId);
 			statement.setString(2, firstName);
 			statement.setString(3, address);
 			statement.setString(4, phone);
