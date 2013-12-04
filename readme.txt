@@ -14,7 +14,7 @@
 
   Etape 2: Déploiement de l'application web
     -copier RED.war dans le dossier webapps de Tomcat
-
+	 note: ne pas se préocuper du context.xml, il se trouve que tomcat est malin
 #Lancement de l'application:
 
 Accèder à http://[adresse de tomcat]/RED depuis votre navigateur pour avoir accès à l'application
