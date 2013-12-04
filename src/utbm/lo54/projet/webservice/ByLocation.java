@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -24,6 +23,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+/**
+ * Webservice retournant la liste des enregistrements, en JSON, des sessions
+ * se déroulant à la localisation passé en paramètres
+ */
 @Path("/byLocation/{KeyLocation}")
 public class ByLocation {
 
@@ -31,13 +34,12 @@ public class ByLocation {
 	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String getCourse(@PathParam("KeyLocation") String KeyLocation) {
 		
-		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
-		ObjectMapper mapper = provider.getContext(null);
-
+		
 		Connection connexion = null;
 		List<Record> records = new ArrayList<Record>();
 
 		try {
+			/* récupération du DataSource vers notre base de données */
 			Context myContext = new InitialContext();
 			DataSource datasource = (DataSource) myContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
 			connexion = datasource.getConnection();
@@ -56,7 +58,7 @@ public class ByLocation {
 			statement.setString(1,KeyLocation);
 			ResultSet resultSet = statement.executeQuery();
 			
-			
+			/* On ajoute les enregistrements trouvés à la liste */
 			while (resultSet.next()) {
 				int id = resultSet.getInt("id");
 				String start = resultSet.getString("start");
@@ -71,9 +73,7 @@ public class ByLocation {
 		}
 		
 		catch (Exception e) {
-			System.out.println("Failed");
 			e.printStackTrace();
-
 		} 
 		
 		finally {
@@ -86,6 +86,11 @@ public class ByLocation {
 			}
 		}
 		
+		/*On récupère notre mapper JSON custom */
+		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
+		ObjectMapper mapper = provider.getContext(null);
+
+		/* Génère le JSON associée à la liste d'enregistrements */
 		try {
 			return mapper.writeValueAsString(records);
 		} catch (JsonProcessingException e) {

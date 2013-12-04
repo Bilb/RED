@@ -11,13 +11,16 @@ import javax.sql.DataSource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
+/**
+ * Webservice permettant de s'enregistrer à une session.
+ * Les paramètres sont dans l'ordre
+ * {session}/{lastName}/{firstName}/{address}/{phone}/{email}
+ *  
+ *  */
 @Path("/subscribe/{session}/{lastName}/{firstName}/{address}/{phone}/{email}")
 public class Subscribe {
 	@GET
-	@Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 	public String registerSubscription(
 			@PathParam("session") 		int			sessionId	,
 			@PathParam("lastName") 		String		lastName	,
@@ -28,17 +31,13 @@ public class Subscribe {
 			) {
 
 		Connection connexion = null;
-		DataSource dataSource = null;
+
 		try {
-			try {
-				Context namingContext;
-				namingContext = new InitialContext();
-				dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			/* récupération du DataSource vers notre base de données */
+			Context namingContext = new InitialContext();
+			DataSource dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
 			connexion = dataSource.getConnection();
+			
 			PreparedStatement statement = connexion.prepareStatement("INSERT INTO CLIENT"
 					+ " ( LASTNAME, FIRSTNAME, ADDRESS, PHONE, EMAIL, SESSION_ID)"
 					+ " VALUES (?, ?, ?, ?, ?, ?)"
@@ -49,11 +48,18 @@ public class Subscribe {
 			statement.setString(4, phone);
 			statement.setString(5, email);
 			statement.setInt(6, sessionId);
+			
+			//éxécution de l'ajout
 			statement.executeUpdate();
+			
 
-		} catch ( SQLException e ) {
+
+
+		} catch (NamingException e) {
 			e.printStackTrace();
-			return "failed to update";
+		}
+		catch ( SQLException e ) {
+			e.printStackTrace();
 		}
 		finally {
 			if ( connexion != null ) {
@@ -65,7 +71,7 @@ public class Subscribe {
 			}
 		}
 
-		return "utilisateur " + lastName + " inscrit � la session num " + sessionId;
+		return "";
 	}
 }
 

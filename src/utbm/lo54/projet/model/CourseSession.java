@@ -2,22 +2,41 @@ package utbm.lo54.projet.model;
 
 import java.util.Date;
 
-
+/**
+ * Enregistrement d'une session d'un cours 
+ */
 public class CourseSession {
+	
+	/**
+	 * Identifiant de cette session
+	 */
 	private int id;
+	
+	/**
+	 * Date de début de cette session
+	 */
 	private Date start;
+	
+	/**
+	 * Date de fin de cette session
+	 */
 	private Date end;
+
+	/**
+	 * Identifiant du cours associé à cette session
+	 */
 	private String courseCode;
+	
+	/**
+	 * Identifiant de la localisation associé à cette session
+	 */
 	private int locationId;
+	
+	public CourseSession() {
+	}
 	
 	public CourseSession(int id, Date start, Date end, String courseCode,
 			int locationId) {
-		super();
-		this.id = id;
-		this.start = start;
-		this.end = end;
-		this.courseCode = courseCode;
-		this.locationId = locationId;
 	}
 
 	public int getId() {

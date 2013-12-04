@@ -1,11 +1,41 @@
 package utbm.lo54.projet.model;
 
+
+/**
+ * Cette classe encapsule tout ce qui représente un enregistrement
+ * dans la table client, c'est à dire ces infos, ainsi que l'identifiant de 
+ * session auquelle est enregistré celui ci. Nous avons donc des doublons
+ */
 public class Client {
+	/**
+	 * Identifiant de ce client
+	 */
 	private int id;
+	
+	/**
+	 * Prénom de cet client
+	 */
 	private String lastname;
+	
+	/**
+	 * Nom de famille
+	 */
 	private String firstName;
+	
+	/**
+	 * Adresse de ce client
+	 */
 	private String address;
+	
+	/**
+	 * Téléphone de ce client
+	 */
 	private String phone;
+	
+	
+	/**
+	 * Identifiant de la session associé à cet enregistrement
+	 */
 	private int sessionId;
 	
 	public Client(int id, String lastname, String firstName, String address,
@@ -18,6 +48,8 @@ public class Client {
 		this.phone = phone;
 		this.sessionId = sessionId;
 	}
+	
+	
 	
 	public int getId() {
 		return id;
