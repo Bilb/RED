@@ -1,8 +1,24 @@
 package utbm.lo54.projet.model;
 
+
+/**
+ * Enregistrement d'une localisation
+ *
+ */
 public class Location {
+	
+	/**
+	 * Identifiant de cette localisation
+	 */
 	private int id;
+	
+	/**
+	 * Ville de cette localisation
+	 */
 	private String city;
+	
+	public Location() {
+	}
 	
 	public Location(int id, String city) {
 		super();
