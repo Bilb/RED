@@ -1,4 +1,4 @@
-DROP DATABASE schoolFormation;
+DROP DATABASE IF EXISTS schoolFormation;
 
 CREATE DATABASE schoolFormation;
 USE schoolFormation;
