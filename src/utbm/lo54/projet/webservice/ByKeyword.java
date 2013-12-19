@@ -23,6 +23,11 @@ import utbm.lo54.projet.model.Record;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+/**
+ * Webservice retournant la liste des enregistrements, en JSON, des sessions
+ * se dont le titre contient le texte passé en paramètre.
+ */
 @Path("/byKeyword/{keyword}")
 public class ByKeyword {
 
@@ -34,12 +39,11 @@ public class ByKeyword {
 		List<Record> courseListMatchingKeyword = new ArrayList<Record>();
 
 		try {
-
-			DataSource dataSource = null;
-			Context namingContext;
-			namingContext = new InitialContext();
-			dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");
+			/* récupération du DataSource vers notre base de données */
+			Context namingContext = new InitialContext();
+			DataSource dataSource = (DataSource)namingContext.lookup("java:comp/env/jdbc/schoolFormationDataSource");;
 			connexion = dataSource.getConnection();
+			
 			PreparedStatement statement = connexion.prepareStatement("select "
 															+ "cs.id,c.code, c.title,  l.city, cs.start, cs.end "
 														+ "from "
@@ -50,9 +54,15 @@ public class ByKeyword {
 																	+ "on (cs.location_id = l.id) "
 														+ "where "
 															+ "c.title like ? ");
+
+			/* ajout des '%' permettant de chercher le texte demandé par l'utilisateur
+			 * n'importe où dans le titre du cours 
+			 */
 			keyword = "%"+keyword+"%";
 			statement.setString(1, keyword);
 			ResultSet resultat = statement.executeQuery();
+			
+			/* On ajoute les enregistrements trouvés à la liste */
 			while ( resultat.next() ) {
 				Record record = new Record(resultat.getInt(1), resultat.getString(5), resultat.getString(6),
 											resultat.getString(2), resultat.getString(3), resultat.getString(4));
@@ -64,7 +74,6 @@ public class ByKeyword {
 
 		} catch ( SQLException e ) {
 			e.printStackTrace();
-			return "failed to connect";
 		}
 		finally {
 			if ( connexion != null ) {
@@ -76,9 +85,11 @@ public class ByKeyword {
 			}
 		}
 
-		// Converting to json format
+		/*On récupère notre mapper JSON custom */
 		IndentObjectMapperProvider provider = new IndentObjectMapperProvider();
 		ObjectMapper mapper = provider.getContext(null);
+		
+		/* Génère le JSON associée à la liste d'enregistrements */
 		try {
 			return mapper.writeValueAsString(courseListMatchingKeyword);
 		} catch (JsonProcessingException e) {
